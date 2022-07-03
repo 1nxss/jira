@@ -30,7 +30,7 @@ services:
 
   jira:
     # Image tag (replace with yours)
-    image: atlassian/jira-software:9.0.0-jdk11
+    image: atlassian/jira-software:9
     volumes:
       - jira-data:/var/atlassian/application-data/jira
     environment:
@@ -117,7 +117,7 @@ services:
       # Basic Authentication for Traefik Dashboard
       # Username: tradmin (replace with yours)
       # Passwords must be encoded using MD5, SHA1, or BCrypt https://hostingcanada.org/htpasswd-generator/
-      - "traefik.http.middlewares.authtraefik.basicauth.users=tradmin:$$2y$$10$$t2OjsJXBurTMmTA2PoyzUuYt0Qe4suo7IBbHGl8vc3f24NdrXMWCi
+      - "traefik.http.middlewares.authtraefik.basicauth.users=tradmin:$$2y$$10$$t2OjsJXBurTMmTA2PoyzUuYt0Qe4suo7IBbHGl8vc3f24NdrXMWCi"
       - "traefik.http.routers.http-catchall.rule=HostRegexp(`{host:.+}`)"
       - "traefik.http.routers.http-catchall.entrypoints=web"
       - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
