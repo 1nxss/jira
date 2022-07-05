@@ -30,17 +30,17 @@ services:
 
   jira:
     # Image tag (replace with yours)
-    image: atlassian/jira-software:9.0
+    image: atlassian/jira-software:9
     volumes:
       - jira-data:/var/atlassian/application-data/jira
-      - /home/usrlnx/git/atlassian-agent.jar:/opt/atlassian/jira/bin/atlassian-agent.jar
+      - /home/usrlnx/git/atlassian-agent.jar:/var/atlassian/jira/bin/atlassian-agent.jar
     environment:
-      CATALINA_OPTS: "-javaagent:/opt/atlassian/jira/bin/atlassian-agent.jar ${CATALINA_OPTS}"
+      CATALINA_OPTS: "-javaagent:/var/atlassian/jira/bin/atlassian-agent.jar"
       # Application memory (replace with yours)
       JVM_MINIMUM_MEMORY: 8G
       JVM_MAXIMUM_MEMORY: 8G
       # Jira URL (replace with yours)
-      ATL_PROXY_NAME: sd.hd555.info
+      ATL_PROXY_NAME: jira.hd555.info
       ATL_PROXY_PORT: 443
       ATL_TOMCAT_SCHEME: https
       ATL_TOMCAT_SECURE: 'true'
