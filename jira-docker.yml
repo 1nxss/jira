@@ -30,10 +30,12 @@ services:
 
   jira:
     # Image tag (replace with yours)
-    image: atlassian/jira-software:9
+    image: atlassian/jira-software:9.0
     volumes:
       - jira-data:/var/atlassian/application-data/jira
+      - /home/usrlnx/git/atlassian-agent.jar:/opt/atlassian/jira/bin/atlassian-agent.jar
     environment:
+      CATALINA_OPTS: "-javaagent:/opt/atlassian/jira/bin/atlassian-agent.jar ${CATALINA_OPTS}"
       # Application memory (replace with yours)
       JVM_MINIMUM_MEMORY: 8G
       JVM_MAXIMUM_MEMORY: 8G
@@ -51,7 +53,7 @@ services:
     labels:
       - "traefik.enable=true"
       # Jira URL (replace with yours)
-      - "traefik.http.routers.jira.rule=Host(`sd.hd555.info`)"
+      - "traefik.http.routers.jira.rule=Host(`jira.hd555.info`)"
       - "traefik.http.routers.jira.service=jira"
       - "traefik.http.routers.jira.entrypoints=websecure"
       - "traefik.http.services.jira.loadbalancer.server.port=8080"
@@ -158,7 +160,7 @@ services:
       - jira-postgres-backups:/srv/jira-postgres/backups
     environment:
       # Database password (replace with yours)
-      POSTGRES_PASSWORD: zkhuneTBFxpgvUrtDaKs9XG
+      POSTGRES_PASSWORD: NNzsIGP7WCiTdW7UR9TWBrIlB
     restart: unless-stopped
     depends_on:
       postgres:
